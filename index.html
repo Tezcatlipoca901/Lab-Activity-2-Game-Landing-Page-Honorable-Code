@@ -32,7 +32,7 @@
             <div class="nav-logo">
                 <a href="#hero"><img src="images/minecraft logo.png" alt="Minecraft Creeper Logo"></a>
             </div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#game-mode">Game Modes</a></li>
                 <li><a href="#bosses">Bosses</a></li>
                 <li><a href="#media">Media</a></li>
@@ -41,8 +41,14 @@
             <div class="nav-cta">
                 <a href="#media"><img src="images/button nav.png" alt="Play Now"></a>
             </div>
+            <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
+    <div class="nav-backdrop" id="navBackdrop"></div>
 
     <!-- Main content -->
     <main>
@@ -144,7 +150,7 @@
                             <img src="images/wither.png" alt="Wither Silhouette">
                         </div>
                         <div class="boss-card-content">
-                            <h3 class="boss-name"><span class="boss-diamond">&#x25C6;</span>???</h3>
+                            <h3 class="boss-name">???</h3>
                             <p class="boss-desc">Unseen and<br>unknowable.</p>
                         </div>
                     </div>
@@ -230,11 +236,41 @@
         </footer>
     </main>
 
-    <!-- Scroll-Spy & Interactive JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('section, footer');
             const navLinks = document.querySelectorAll('.nav-links a');
+            const navLogo = document.querySelector('.nav-logo');
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const navLinksList = document.getElementById('navLinks');
+            const navBackdrop = document.getElementById('navBackdrop');
+
+            function toggleMenu(isOpen) {
+                const active = isOpen !== undefined ? isOpen : !navLinksList.classList.contains('active');
+                if (active) {
+                    hamburgerBtn.classList.add('active');
+                    navLinksList.classList.add('active');
+                    if (navBackdrop) navBackdrop.classList.add('active');
+                    if (navLogo) navLogo.classList.add('menu-hidden');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    hamburgerBtn.classList.remove('active');
+                    navLinksList.classList.remove('active');
+                    if (navBackdrop) navBackdrop.classList.remove('active');
+                    if (navLogo) navLogo.classList.remove('menu-hidden');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            if (hamburgerBtn && navLinksList) {
+                hamburgerBtn.addEventListener('click', () => toggleMenu());
+                if (navBackdrop) {
+                    navBackdrop.addEventListener('click', () => toggleMenu(false));
+                }
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => toggleMenu(false));
+                });
+            }
 
             function onScroll() {
                 let scrollPos = window.scrollY + 200;

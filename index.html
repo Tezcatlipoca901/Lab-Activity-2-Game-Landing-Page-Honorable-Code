@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css?v=7">
+    <link rel="stylesheet" href="css/style.css?v=8">
     <title>Welcome to Minecraft Landing Page</title>
     <link rel="icon" type="image/x-icon" href="images/minecraft logo.png">
 </head>
 <body>
+
+    <!-- Hidden checkbox — controls mobile nav open/close (no JS, no scroll) -->
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" aria-hidden="true">
 
     <!-- Background slideshow -->
     <div class="slideshow" aria-hidden="true">
@@ -41,17 +44,17 @@
             <div class="nav-cta">
                 <a href="#start-playing"><img src="images/button nav.png" alt="Play Now"></a>
             </div>
-            <a href="#mobile-nav" class="hamburger-menu" aria-label="Toggle navigation">
+            <label for="nav-toggle" class="hamburger-menu" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
                 <span></span>
-            </a>
+            </label>
         </nav>
     </header>
 
-    <!-- Pure CSS Mobile Navigation Menu -->
-    <div id="mobile-nav" class="mobile-nav-overlay">
-        <a href="#" class="mobile-nav-close" aria-label="Close menu">&times;</a>
+    <!-- Mobile Navigation Menu (checkbox-driven, no scroll on close) -->
+    <div class="mobile-nav-overlay">
+        <label for="nav-toggle" class="mobile-nav-close" aria-label="Close menu">&times;</label>
         <ul class="mobile-nav-links">
             <li><a href="#game-mode">Game Modes</a></li>
             <li><a href="#bosses">Bosses</a></li>
@@ -59,7 +62,7 @@
             <li><a href="#community">Community</a></li>
         </ul>
     </div>
-    <a href="#" class="nav-backdrop" aria-label="Close navigation backdrop"></a>
+    <label for="nav-toggle" class="nav-backdrop" aria-label="Close navigation backdrop"></label>
 
     <!-- Main content -->
     <main>
@@ -67,7 +70,7 @@
             <div class="hero">
                 <img class="hero-title" src="images/minecraft name.png" alt="Minecraft">
                 <p class="hero-tagline">Build anything you imagine. Survive the night. Explore<br>infinite worlds made of blocks — alone or with friends.</p>
-                <a href="#game-mode" class="hero-btn">
+                <a href="#start-playing" class="hero-btn">
                     <img src="images/button.png" alt="Play Now">
                 </a>
                 <div class="hero-stats">
@@ -86,6 +89,8 @@
                 </div>
             </div>
         </section>
+
+        <hr class="section-divider">
 
         <section id="game-mode">
             <div class="game-mode-inner">
@@ -122,6 +127,8 @@
 
             </div>
         </section>
+
+        <hr class="section-divider">
 
         <!-- ============================================ GAME BOSSES SECTION ============================================ -->
         <section id="bosses" class="bosses-section">
@@ -169,6 +176,8 @@
                 </div>
             </div>
         </section>
+
+        <hr class="section-divider">
 
         <!-- ============================================ FOOTER PART / BIOMES SECTION ============================================ -->
         <section id="media" class="media-cta-section">

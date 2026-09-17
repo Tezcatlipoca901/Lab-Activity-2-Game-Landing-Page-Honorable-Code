@@ -190,30 +190,30 @@ div p {
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0;
-    animation: crossFade 58.5s infinite;
+    animation: crossFade 65s infinite;
 }
 
 @keyframes crossFade {
     0%      { opacity: 0; }
-    0.855%  { opacity: 1; }
-    6.837%  { opacity: 1; }
-    7.692%  { opacity: 0; }
+    0.46%   { opacity: 1; }
+    7.23%   { opacity: 1; }
+    7.69%   { opacity: 0; }
     100%    { opacity: 0; }
 }
 
 .slideshow .slide:nth-child(1)  { animation-delay:  0s; }
-.slideshow .slide:nth-child(2)  { animation-delay:  4.5s; }
-.slideshow .slide:nth-child(3)  { animation-delay:  9s; }
-.slideshow .slide:nth-child(4)  { animation-delay: 13.5s; }
-.slideshow .slide:nth-child(5)  { animation-delay: 18s; }
-.slideshow .slide:nth-child(6)  { animation-delay: 22.5s; }
-.slideshow .slide:nth-child(7)  { animation-delay: 27s; }
-.slideshow .slide:nth-child(8)  { animation-delay: 31.5s; }
-.slideshow .slide:nth-child(9)  { animation-delay: 36s; }
-.slideshow .slide:nth-child(10) { animation-delay: 40.5s; }
-.slideshow .slide:nth-child(11) { animation-delay: 45s; }
-.slideshow .slide:nth-child(12) { animation-delay: 49.5s; }
-.slideshow .slide:nth-child(13) { animation-delay: 54s; }
+.slideshow .slide:nth-child(2)  { animation-delay:  5s; }
+.slideshow .slide:nth-child(3)  { animation-delay: 10s; }
+.slideshow .slide:nth-child(4)  { animation-delay: 15s; }
+.slideshow .slide:nth-child(5)  { animation-delay: 20s; }
+.slideshow .slide:nth-child(6)  { animation-delay: 25s; }
+.slideshow .slide:nth-child(7)  { animation-delay: 30s; }
+.slideshow .slide:nth-child(8)  { animation-delay: 35s; }
+.slideshow .slide:nth-child(9)  { animation-delay: 40s; }
+.slideshow .slide:nth-child(10) { animation-delay: 45s; }
+.slideshow .slide:nth-child(11) { animation-delay: 50s; }
+.slideshow .slide:nth-child(12) { animation-delay: 55s; }
+.slideshow .slide:nth-child(13) { animation-delay: 60s; }
 
 /* ============================================================
    HEADER & NAVBAR — Flexbox
@@ -254,7 +254,7 @@ div p {
 .nav-links a {
     text-decoration: none;
     color: var(--color-nav-link);
-    font-family: var(--font-ui);
+    font-family: var(--font-pixel);
     font-size: 0.9rem;
     font-weight: 400;
     letter-spacing: 0.03em;
@@ -281,6 +281,31 @@ div p {
 .nav-backdrop,
 .mobile-nav-overlay {
     display: none;
+}
+
+/* Always hide the nav toggle checkbox */
+.nav-toggle-checkbox {
+    display: none;
+}
+
+/* ── Section Divider ── */
+.section-divider {
+    position: relative;
+    z-index: 2;
+    border: none;
+    height: 2px;
+    margin: 0;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(90, 191, 42, 0.15) 10%,
+        rgba(90, 191, 42, 0.6) 35%,
+        #5abf2a 50%,
+        rgba(90, 191, 42, 0.6) 65%,
+        rgba(90, 191, 42, 0.15) 90%,
+        transparent 100%
+    );
+    box-shadow: 0 0 10px rgba(90, 191, 42, 0.4), 0 0 24px rgba(90, 191, 42, 0.15);
 }
 
 /* Global Mobile Nav Links Hover */
@@ -506,19 +531,21 @@ div p {
         text-decoration: none;
     }
 
-    /* ── PURE CSS :target STATE TOGGLES ── */
-    #mobile-nav:target {
+    /* ── CHECKBOX NAV TOGGLE ── */
+    /* Show overlay when checkbox is checked */
+    .nav-toggle-checkbox:checked ~ .mobile-nav-overlay {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    body:has(#mobile-nav:target) .nav-backdrop,
-    #mobile-nav:target ~ .nav-backdrop {
+    /* Show backdrop when checkbox is checked */
+    .nav-toggle-checkbox:checked ~ .nav-backdrop {
         display: block;
     }
 
-    body:has(#mobile-nav:target) .nav-logo {
+    /* Hide logo when menu is open */
+    .nav-toggle-checkbox:checked ~ header .nav-logo {
         opacity: 0 !important;
         visibility: hidden !important;
         pointer-events: none !important;
@@ -688,8 +715,8 @@ div p {
 
     #hero {
         padding: 0 24px;
-        align-items: flex-end;
-        padding-bottom: 60px;
+        align-items: center;
+        padding-top: var(--nav-height);
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
@@ -777,7 +804,7 @@ div p {
         position: relative !important;
         z-index: 2 !important;
         background: var(--color-bg) !important;
-        padding: 40px 0 80px !important;
+        padding: 40px 0 65px !important;
         min-height: auto !important;
         display: flex !important;
         justify-content: center !important;
@@ -790,7 +817,7 @@ div p {
         position: relative !important;
         width: 402px !important;
         max-width: 100% !important;
-        height: 1100px !important;
+        height: 860px !important;
         margin: 0 auto !important;
         padding: 0 !important;
         overflow: visible !important;
@@ -904,7 +931,7 @@ div p {
     .mode-survival {
         left: auto !important;
         right: 20px !important;
-        top: 640px !important;
+        top: 560px !important;
         width: auto !important;
         max-width: calc(100% - 40px) !important;
         text-align: right !important;
@@ -1012,7 +1039,7 @@ div p {
     .float-alex {
         left: 20px !important;
         right: auto !important;
-        top: 800px !important;
+        top: 700px !important;
         width: 240px !important;
         height: auto !important;
         max-width: 60% !important;
@@ -1026,7 +1053,7 @@ div p {
     .float-apple {
         left: auto !important;
         right: 50px !important;
-        top: 920px !important;
+        top: 820px !important;
         width: 70px !important;
         height: 70px !important;
         transform: rotate(33.54deg) !important;
@@ -1388,8 +1415,9 @@ html {
 
 .bosses-inner {
     width: 100%;
-    max-width: 1300px;
+    max-width: 100%;
     margin: 0 auto;
+    padding: 0 54px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1439,9 +1467,9 @@ html {
 }
 
 .boss-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-8px) scale(1.02);
     border-color: var(--color-accent);
-    box-shadow: 0 16px 40px rgba(90, 191, 42, 0.25);
+    box-shadow: 0 16px 40px rgba(90, 191, 42, 0.5);
 }
 
 .boss-card-bg {
@@ -1576,7 +1604,7 @@ html {
 .biomes-carousel-container {
     position: relative;
     width: 100%;
-    max-width: 1320px;
+    max-width: 100%;
     margin: 0 auto 40px auto;
     overflow: hidden;
     padding: 0 54px;
@@ -1691,9 +1719,9 @@ html {
 }
 
 .media-card:hover {
-    transform: scale(1.04);
-    border-color: #55ff55;
-    box-shadow: 0 14px 36px rgba(90, 191, 42, 0.5);
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--color-accent);
+    box-shadow: 0 16px 40px rgba(90, 191, 42, 0.5);
     z-index: 5;
 }
 

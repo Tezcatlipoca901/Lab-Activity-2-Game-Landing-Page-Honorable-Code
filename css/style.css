@@ -1924,14 +1924,15 @@ html {
     text-decoration: none;
     font-family: var(--font-pixel) !important;
     font-weight: 400 !important;
-    color: #ffffff !important;
+    color: #ffffff;
     font-size: 1.05rem;
     text-shadow: none !important;
     transition: color 0.2s ease, padding-left 0.2s ease;
 }
 
-.footer-links a:hover {
-    color: var(--color-accent);
+.footer-links a:hover,
+.footer-links a:focus {
+    color: var(--color-accent) !important;
     padding-left: 4px;
 }
 
@@ -2218,8 +2219,13 @@ html {
         font-family: var(--font-pixel) !important;
         font-weight: 400 !important;
         font-size: 14px !important;
-        color: #ffffff !important;
+        color: #ffffff;
         text-shadow: none !important;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus {
+        color: var(--color-accent) !important;
     }
 
     .copyright-text {

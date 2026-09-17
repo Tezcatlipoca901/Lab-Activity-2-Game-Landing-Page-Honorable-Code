@@ -261,8 +261,10 @@ div p {
     transition: color 0.2s;
 }
 
-.nav-links a:hover {
-    color: var(--color-text-hover);
+.nav-links a:hover,
+.nav-links a:focus {
+    color: #5abf2a !important;
+    text-shadow: 0 0 10px rgba(90, 191, 42, 0.8);
 }
 
 .nav-cta img {
@@ -275,10 +277,19 @@ div p {
     transform: scale(1.03);
 }
 
-/* ── Hamburger Menu Button & Backdrop (hidden on desktop) ── */
 .hamburger-menu,
-.nav-backdrop {
+.nav-backdrop,
+.mobile-nav-overlay {
     display: none;
+}
+
+/* Global Mobile Nav Links Hover */
+.mobile-nav-links a:hover,
+.mobile-nav-links a:focus,
+.mobile-nav-links a:active,
+.mobile-nav-links li:hover > a {
+    color: #55ff55 !important;
+    text-shadow: 0 0 10px #55ff55, 0 0 20px #5abf2a, 0 0 30px #3c8c1e !important;
 }
 
 /* ============================================================
@@ -372,10 +383,145 @@ div p {
 
     .navbar {
         padding: 0 24px;
+        position: relative;
     }
 
     .nav-links {
-        gap: 24px;
+        display: none !important;
+    }
+
+    .nav-cta {
+        display: none !important;
+    }
+
+    .hamburger-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 28px;
+        height: 20px;
+        background: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        z-index: 1005;
+        text-decoration: none;
+    }
+
+    .hamburger-menu span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: var(--color-text);
+        border-radius: 2px;
+        transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+    }
+
+    .hamburger-menu:hover span {
+        background-color: var(--color-accent);
+    }
+
+    /* ── Pure CSS Mobile Navigation Overlay ── */
+    .mobile-nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(8, 14, 8, 0.98);
+        border-bottom: 2px solid var(--color-primary);
+        padding: 24px 60px 24px 60px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+        z-index: 1005;
+    }
+
+    .mobile-nav-close {
+        position: absolute;
+        top: 16px;
+        right: 24px;
+        font-size: 2rem;
+        line-height: 1;
+        color: var(--color-accent);
+        text-decoration: none;
+        font-family: sans-serif;
+        font-weight: 300;
+        z-index: 1006;
+    }
+
+    .mobile-nav-close:hover {
+        color: #ffffff;
+    }
+
+    .mobile-nav-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .mobile-nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .mobile-nav-links a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        color: var(--color-nav-link);
+        font-size: 1.15rem;
+        font-family: var(--font-pixel);
+        letter-spacing: 0.05em;
+        padding: 6px 0;
+        cursor: pointer;
+        transition: color 0.15s ease-in-out, text-shadow 0.15s ease-in-out, transform 0.15s ease-in-out;
+    }
+
+    .mobile-nav-links a:hover,
+    .mobile-nav-links a:focus,
+    .mobile-nav-links a:active,
+    .mobile-nav-links li:hover > a {
+        color: #55ff55 !important;
+        text-shadow: 0 0 10px #55ff55, 0 0 20px #5abf2a, 0 0 30px #3c8c1e !important;
+        transform: scale(1.05);
+    }
+
+    /* Full-screen Blurred Backdrop */
+    .nav-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(8, 14, 8, 0.75);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        z-index: 1002;
+        text-decoration: none;
+    }
+
+    /* ── PURE CSS :target STATE TOGGLES ── */
+    #mobile-nav:target {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    body:has(#mobile-nav:target) .nav-backdrop,
+    #mobile-nav:target ~ .nav-backdrop {
+        display: block;
+    }
+
+    body:has(#mobile-nav:target) .nav-logo {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
     }
 
     /* Tablet uses desktop-style layout (landscape) */
@@ -405,7 +551,7 @@ div p {
         width: 58.75%;
         max-width: 846px;
         right: 0;
-        top: -180px !important;
+        top: 0 !important;
         text-align: right;
     }
 
@@ -582,16 +728,14 @@ div p {
         display: none;
     }
 
+    .nav-links {
+        display: none !important;
+    }
+
     .nav-logo {
         position: relative;
         z-index: 1005;
         transition: opacity 0.2s ease, visibility 0.2s ease;
-    }
-
-    .nav-logo.menu-hidden {
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
     }
 
     .hamburger-menu {
@@ -608,6 +752,7 @@ div p {
         margin: 0;
         position: relative;
         z-index: 1005;
+        text-decoration: none;
     }
 
     .hamburger-menu span {
@@ -623,69 +768,7 @@ div p {
         background-color: var(--color-accent);
     }
 
-    .hamburger-menu.active span:nth-child(1) {
-        transform: translateY(8.5px) rotate(45deg);
-        background-color: var(--color-accent);
-    }
 
-    .hamburger-menu.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger-menu.active span:nth-child(3) {
-        transform: translateY(-8.5px) rotate(-45deg);
-        background-color: var(--color-accent);
-    }
-
-    /* Full-screen blurred backdrop */
-    .nav-backdrop {
-        display: block;
-        position: fixed;
-        inset: 0;
-        background: rgba(8, 14, 8, 0.75);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        z-index: 998;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-        pointer-events: none;
-    }
-
-    .nav-backdrop.active {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-    }
-
-    /* Mobile menu starting at top: 0 with text positioned at top */
-    .nav-links {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: rgba(8, 14, 8, 0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-bottom: 2px solid var(--color-primary);
-        padding: 24px 60px 24px 60px;
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links a {
-        font-size: 1.1rem;
-        font-family: var(--font-pixel);
-        letter-spacing: 0.05em;
-    }
 
     /* ============================================================
        GAME MODE — Mobile (iPhone 17 layout: 402px x 1117px canvas)
@@ -983,7 +1066,7 @@ div p {
         width: 58.75%;
         max-width: 846px;
         right: 0;
-        top: -180px !important;
+        top: 0 !important;
         text-align: right;
     }
 
@@ -1133,7 +1216,7 @@ div p {
         width: 846px;
         max-width: 58.75%;
         right: 0;
-        top: -180px !important;
+        top: 0 !important;
         text-align: right;
     }
 
@@ -1468,27 +1551,150 @@ html {
     gap: 80px;
 }
 
-/* Media Gallery Screenshots */
-.media-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    width: 100%;
-    max-width: 1300px;
+/* Biomes Title Box (matches Discover Bosses style) */
+.biomes-title-wrapper {
+    display: inline-block;
+    padding: 16px 48px;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.05);
+    background: rgba(8, 14, 8, 0.85);
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.media-card {
-    border-radius: 6px;
+.biomes-main-title {
+    font-family: var(--font-pixel);
+    font-size: clamp(32px, 5vw, 64px);
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 0px #000;
+    margin: 0;
+}
+
+/* Pure CSS Radio Netflix-Style Carousel */
+.biomes-carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto 40px auto;
     overflow: hidden;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    aspect-ratio: 16 / 9;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    padding: 0 54px;
+}
+
+.biomes-carousel-container input[type="radio"] {
+    display: none !important;
+}
+
+/* Arrow Label Groups */
+.arrow-group {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 15;
+}
+
+.arrow-group-left {
+    left: 0px;
+}
+
+.arrow-group-right {
+    right: 0px;
+}
+
+.carousel-arrow {
+    display: none;
+    width: 48px;
+    height: 72px;
+    background: rgba(8, 14, 8, 0.9);
+    color: var(--color-accent);
+    border: 2px solid var(--color-primary);
+    border-radius: 6px;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.carousel-arrow:hover {
+    background: rgba(90, 191, 42, 0.3);
+    color: #55ff55;
+    border-color: #55ff55;
+    box-shadow: 0 0 20px rgba(90, 191, 42, 0.7);
+    transform: scale(1.08);
+}
+
+/* Dynamic Arrow Visibility based on Checked Radio Input */
+#slide-1:checked ~ .arrow-group-left .arrow-for-slide-1,
+#slide-1:checked ~ .arrow-group-right .arrow-for-slide-1,
+#slide-2:checked ~ .arrow-group-left .arrow-for-slide-2,
+#slide-2:checked ~ .arrow-group-right .arrow-for-slide-2,
+#slide-3:checked ~ .arrow-group-left .arrow-for-slide-3,
+#slide-3:checked ~ .arrow-group-right .arrow-for-slide-3,
+#slide-4:checked ~ .arrow-group-left .arrow-for-slide-4,
+#slide-4:checked ~ .arrow-group-right .arrow-for-slide-4,
+#slide-5:checked ~ .arrow-group-left .arrow-for-slide-5,
+#slide-5:checked ~ .arrow-group-right .arrow-for-slide-5,
+#slide-6:checked ~ .arrow-group-left .arrow-for-slide-6,
+#slide-6:checked ~ .arrow-group-right .arrow-for-slide-6,
+#slide-7:checked ~ .arrow-group-left .arrow-for-slide-7,
+#slide-7:checked ~ .arrow-group-right .arrow-for-slide-7,
+#slide-8:checked ~ .arrow-group-left .arrow-for-slide-8,
+#slide-8:checked ~ .arrow-group-right .arrow-for-slide-8 {
+    display: flex;
+}
+
+/* Hide Right Arrow on Desktop once the last card (AND MORE!!) is in view */
+@media (min-width: 1025px) {
+    #slide-6:checked ~ .arrow-group-right,
+    #slide-7:checked ~ .arrow-group-right,
+    #slide-8:checked ~ .arrow-group-right {
+        display: none !important;
+    }
+}
+
+/* Carousel Track & Smooth Slide Positions */
+.media-gallery-carousel {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    padding: 16px 0;
+    box-sizing: border-box;
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#slide-1:checked ~ .media-gallery-carousel { transform: translateX(0px); }
+#slide-2:checked ~ .media-gallery-carousel { transform: translateX(calc(-1 * (100% + 24px) / 3)); }
+#slide-3:checked ~ .media-gallery-carousel { transform: translateX(calc(-2 * (100% + 24px) / 3)); }
+#slide-4:checked ~ .media-gallery-carousel { transform: translateX(calc(-3 * (100% + 24px) / 3)); }
+#slide-5:checked ~ .media-gallery-carousel { transform: translateX(calc(-4 * (100% + 24px) / 3)); }
+#slide-6:checked ~ .media-gallery-carousel { transform: translateX(calc(-5 * (100% + 24px) / 3)); }
+#slide-7:checked ~ .media-gallery-carousel { transform: translateX(calc(-5 * (100% + 24px) / 3)); }
+#slide-8:checked ~ .media-gallery-carousel { transform: translateX(calc(-5 * (100% + 24px) / 3)); }
+
+.media-card {
+    flex: 0 0 calc((100% - 48px) / 3);
+    width: calc((100% - 48px) / 3);
+    min-width: calc((100% - 48px) / 3);
+    max-width: calc((100% - 48px) / 3);
+    height: 270px;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid rgba(90, 191, 42, 0.4);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.7);
+    box-sizing: border-box;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .media-card:hover {
-    transform: scale(1.03);
-    border-color: var(--color-accent);
+    transform: scale(1.04);
+    border-color: #55ff55;
+    box-shadow: 0 14px 36px rgba(90, 191, 42, 0.5);
+    z-index: 5;
 }
 
 .media-card img {
@@ -1498,7 +1704,59 @@ html {
     display: block;
 }
 
+.media-card-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(0deg, rgba(8, 14, 8, 0.95) 0%, rgba(8, 14, 8, 0) 100%);
+    color: #ffffff;
+    font-family: var(--font-pixel);
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    padding: 28px 18px 14px 18px;
+    text-shadow: 2px 2px 0 #000;
+    text-align: left;
+}
+
+/* Styled "AND MORE!!" Card */
+.media-card-more {
+    background: linear-gradient(135deg, rgba(8, 18, 8, 0.95) 0%, rgba(20, 48, 20, 0.95) 100%) !important;
+    border: 2px dashed #55ff55 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 24px 16px !important;
+    box-sizing: border-box !important;
+}
+
+.more-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.more-title {
+    font-family: var(--font-pixel);
+    font-size: 1.6rem;
+    color: #55ff55;
+    text-shadow: 0 0 14px rgba(85, 255, 85, 0.7), 2px 2px 0px #000000;
+    letter-spacing: 0.05em;
+}
+
+.more-desc {
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.4;
+    max-width: 220px;
+}
+
 /* Start Playing Today CTA Banner */
+#start-playing,
 .cta-banner {
     display: flex;
     flex-direction: column;
@@ -1507,6 +1765,7 @@ html {
     max-width: 800px;
     gap: 18px;
     padding: 20px;
+    scroll-margin-top: 140px;
 }
 
 .cta-subtitle {
@@ -1689,10 +1948,61 @@ html {
         height: 100%;
     }
 
-    .media-gallery {
-        grid-template-columns: 1fr;
-        max-width: 500px;
+    .biomes-title-wrapper {
+        padding: 12px 24px;
+        width: 100%;
     }
+
+    .carousel-arrow-left {
+        left: 0px;
+    }
+
+    .carousel-arrow-right {
+        right: 0px;
+    }
+
+    /* Biomes Carousel: 1 Card per frame on Mobile/Android View */
+    .biomes-carousel-container {
+        padding: 0 44px !important;
+        box-sizing: border-box !important;
+    }
+
+    .carousel-arrow {
+        width: 36px !important;
+        height: 60px !important;
+        font-size: 1.4rem !important;
+    }
+
+    .media-gallery-carousel {
+        gap: 24px !important;
+        width: 100% !important;
+    }
+
+    .media-card {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        height: 270px !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
+    }
+
+    .media-card img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        border-radius: 8px !important;
+    }
+
+    #slide-1:checked ~ .media-gallery-carousel { transform: translateX(0%) !important; }
+    #slide-2:checked ~ .media-gallery-carousel { transform: translateX(calc(-100% - 24px)) !important; }
+    #slide-3:checked ~ .media-gallery-carousel { transform: translateX(calc(-200% - 48px)) !important; }
+    #slide-4:checked ~ .media-gallery-carousel { transform: translateX(calc(-300% - 72px)) !important; }
+    #slide-5:checked ~ .media-gallery-carousel { transform: translateX(calc(-400% - 96px)) !important; }
+    #slide-6:checked ~ .media-gallery-carousel { transform: translateX(calc(-500% - 120px)) !important; }
+    #slide-7:checked ~ .media-gallery-carousel { transform: translateX(calc(-600% - 144px)) !important; }
+    #slide-8:checked ~ .media-gallery-carousel { transform: translateX(calc(-700% - 168px)) !important; }
 
     .footer-columns {
         grid-template-columns: 1fr 1fr;
@@ -1704,8 +2014,8 @@ html {
     .bosses-section,
     .media-cta-section,
     .site-footer {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 16px;
+        padding-right: 16px;
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
@@ -1727,6 +2037,21 @@ html {
 
     .boss-desc {
         font-size: 0.95rem;
+    }
+
+    /* Mobile Biomes Carousel 1-Card Full Frame */
+    .biomes-carousel-container {
+        padding: 0 38px !important;
+    }
+
+    .carousel-arrow {
+        width: 32px !important;
+        height: 52px !important;
+        font-size: 1.2rem !important;
+    }
+
+    .media-card {
+        height: 240px !important;
     }
 
     .social-bar {

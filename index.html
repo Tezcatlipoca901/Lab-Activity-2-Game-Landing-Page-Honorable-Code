@@ -32,23 +32,34 @@
             <div class="nav-logo">
                 <a href="#hero"><img src="images/minecraft logo.png" alt="Minecraft Creeper Logo"></a>
             </div>
-            <ul class="nav-links" id="navLinks">
+            <ul class="nav-links">
                 <li><a href="#game-mode">Game Modes</a></li>
                 <li><a href="#bosses">Bosses</a></li>
                 <li><a href="#media">Media</a></li>
                 <li><a href="#community">Community</a></li>
             </ul>
             <div class="nav-cta">
-                <a href="#media"><img src="images/button nav.png" alt="Play Now"></a>
+                <a href="#start-playing"><img src="images/button nav.png" alt="Play Now"></a>
             </div>
-            <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle navigation">
+            <a href="#mobile-nav" class="hamburger-menu" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
                 <span></span>
-            </button>
+            </a>
         </nav>
     </header>
-    <div class="nav-backdrop" id="navBackdrop"></div>
+
+    <!-- Pure CSS Mobile Navigation Menu -->
+    <div id="mobile-nav" class="mobile-nav-overlay">
+        <a href="#" class="mobile-nav-close" aria-label="Close menu">&times;</a>
+        <ul class="mobile-nav-links">
+            <li><a href="#game-mode">Game Modes</a></li>
+            <li><a href="#bosses">Bosses</a></li>
+            <li><a href="#media">Media</a></li>
+            <li><a href="#community">Community</a></li>
+        </ul>
+    </div>
+    <a href="#" class="nav-backdrop" aria-label="Close navigation backdrop"></a>
 
     <!-- Main content -->
     <main>
@@ -159,17 +170,86 @@
             </div>
         </section>
 
-        <!-- ============================================ FOOTER PART ============================================ -->
+        <!-- ============================================ FOOTER PART / BIOMES SECTION ============================================ -->
         <section id="media" class="media-cta-section">
-            <!-- Media Gallery -->
-            <div class="media-gallery">
-                <div class="media-card"><img src="images/med one.JPG" alt="Minecraft Landscape 1"></div>
-                <div class="media-card"><img src="images/med four.JPG" alt="Minecraft Snowy Forest"></div>
-                <div class="media-card"><img src="images/med three.JPG" alt="Minecraft End Dimension"></div>
+            <div class="biomes-title-wrapper">
+                <h2 class="biomes-main-title">EXPLORE OTHER BIOMES!</h2>
+            </div>
+
+            <!-- Pure CSS Netflix-Style Carousel Wrapper -->
+            <div class="biomes-carousel-container">
+                <input type="radio" name="biome-slide" id="slide-1" checked>
+                <input type="radio" name="biome-slide" id="slide-2">
+                <input type="radio" name="biome-slide" id="slide-3">
+                <input type="radio" name="biome-slide" id="slide-4">
+                <input type="radio" name="biome-slide" id="slide-5">
+                <input type="radio" name="biome-slide" id="slide-6">
+                <input type="radio" name="biome-slide" id="slide-7">
+                <input type="radio" name="biome-slide" id="slide-8">
+
+                <!-- Left Navigation Arrows (Non-looping: No left arrow on Slide 1) -->
+                <div class="arrow-group arrow-group-left">
+                    <label for="slide-1" class="carousel-arrow arrow-for-slide-2" aria-label="Previous photo">&#10094;</label>
+                    <label for="slide-2" class="carousel-arrow arrow-for-slide-3" aria-label="Previous photo">&#10094;</label>
+                    <label for="slide-3" class="carousel-arrow arrow-for-slide-4" aria-label="Previous photo">&#10094;</label>
+                    <label for="slide-4" class="carousel-arrow arrow-for-slide-5" aria-label="Previous photo">&#10094;</label>
+                    <label for="slide-5" class="carousel-arrow arrow-for-slide-6" aria-label="Previous photo">&#10094;</label>
+                    <label for="slide-6" class="carousel-arrow arrow-for-slide-7" aria-label="Previous photo">&#10094;</label>
+                    <label for="slide-7" class="carousel-arrow arrow-for-slide-8" aria-label="Previous photo">&#10094;</label>
+                </div>
+
+                <!-- Right Navigation Arrows (Non-looping: No right arrow on Slide 8) -->
+                <div class="arrow-group arrow-group-right">
+                    <label for="slide-2" class="carousel-arrow arrow-for-slide-1" aria-label="Next photo">&#10095;</label>
+                    <label for="slide-3" class="carousel-arrow arrow-for-slide-2" aria-label="Next photo">&#10095;</label>
+                    <label for="slide-4" class="carousel-arrow arrow-for-slide-3" aria-label="Next photo">&#10095;</label>
+                    <label for="slide-5" class="carousel-arrow arrow-for-slide-4" aria-label="Next photo">&#10095;</label>
+                    <label for="slide-6" class="carousel-arrow arrow-for-slide-5" aria-label="Next photo">&#10095;</label>
+                    <label for="slide-7" class="carousel-arrow arrow-for-slide-6" aria-label="Next photo">&#10095;</label>
+                    <label for="slide-8" class="carousel-arrow arrow-for-slide-7" aria-label="Next photo">&#10095;</label>
+                </div>
+
+                <!-- Carousel Cards Track -->
+                <div class="media-gallery-carousel">
+                    <div class="media-card">
+                        <img src="images/crimson_forest.jpg" alt="Crimson Forest Biome">
+                        <div class="media-card-caption">CRIMSON FOREST</div>
+                    </div>
+                    <div class="media-card">
+                        <img src="images/warped_forest.jpg" alt="Warped Forest Biome">
+                        <div class="media-card-caption">WARPED FOREST</div>
+                    </div>
+                    <div class="media-card">
+                        <img src="images/soul_sand_valley.jpg" alt="Soul Sand Valley Biome">
+                        <div class="media-card-caption">SOUL SAND VALLEY</div>
+                    </div>
+                    <div class="media-card">
+                        <img src="images/med five.JPG" alt="Snowy Taiga Biome">
+                        <div class="media-card-caption">SNOWY TAIGA</div>
+                    </div>
+                    <div class="media-card">
+                        <img src="images/med two.JPG" alt="Desert Village Biome">
+                        <div class="media-card-caption">DESERT VILLAGE</div>
+                    </div>
+                    <div class="media-card">
+                        <img src="images/med six.JPG" alt="Cherry Grove Biome">
+                        <div class="media-card-caption">CHERRY GROVE</div>
+                    </div>
+                    <div class="media-card">
+                        <img src="images/med three.JPG" alt="Forest Biome">
+                        <div class="media-card-caption">FOREST BIOME</div>
+                    </div>
+                    <div class="media-card media-card-more">
+                        <div class="more-card-content">
+                            <div class="more-title">AND MORE!!</div>
+                            <div class="more-desc">Countless biomes await your exploration</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Start Playing Today CTA -->
-            <div class="cta-banner">
+            <div class="cta-banner" id="start-playing">
                 <span class="cta-subtitle">Join the Adventure</span>
                 <h2 class="cta-title">START PLAYING TODAY</h2>
                 <p class="cta-desc">Available on PC, console, mobile, and more. Play solo or with hundreds of friends on community servers.</p>
@@ -234,68 +314,6 @@
                     <img src="images/torch.png" alt="Torch" class="footer-torch">
                 </div>
             </div>
-        </footer>
     </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('section, footer');
-            const navLinks = document.querySelectorAll('.nav-links a');
-            const navLogo = document.querySelector('.nav-logo');
-            const hamburgerBtn = document.getElementById('hamburgerBtn');
-            const navLinksList = document.getElementById('navLinks');
-            const navBackdrop = document.getElementById('navBackdrop');
-
-            function toggleMenu(isOpen) {
-                const active = isOpen !== undefined ? isOpen : !navLinksList.classList.contains('active');
-                if (active) {
-                    hamburgerBtn.classList.add('active');
-                    navLinksList.classList.add('active');
-                    if (navBackdrop) navBackdrop.classList.add('active');
-                    if (navLogo) navLogo.classList.add('menu-hidden');
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    hamburgerBtn.classList.remove('active');
-                    navLinksList.classList.remove('active');
-                    if (navBackdrop) navBackdrop.classList.remove('active');
-                    if (navLogo) navLogo.classList.remove('menu-hidden');
-                    document.body.style.overflow = '';
-                }
-            }
-
-            if (hamburgerBtn && navLinksList) {
-                hamburgerBtn.addEventListener('click', () => toggleMenu());
-                if (navBackdrop) {
-                    navBackdrop.addEventListener('click', () => toggleMenu(false));
-                }
-                navLinks.forEach(link => {
-                    link.addEventListener('click', () => toggleMenu(false));
-                });
-            }
-
-            function onScroll() {
-                let scrollPos = window.scrollY + 200;
-                sections.forEach(section => {
-                    const id = section.getAttribute('id');
-                    if (!id) return;
-                    const top = section.offsetTop;
-                    const height = section.offsetHeight;
-
-                    if (scrollPos >= top && scrollPos < top + height) {
-                        navLinks.forEach(link => {
-                            if (link.getAttribute('href') === '#' + id) {
-                                link.classList.add('active');
-                            } else {
-                                link.classList.remove('active');
-                            }
-                        });
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', onScroll);
-            onScroll();
-        });
-    </script>
 </body>
 </html>

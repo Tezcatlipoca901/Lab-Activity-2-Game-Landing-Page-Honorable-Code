@@ -804,7 +804,7 @@ div p {
         position: relative !important;
         z-index: 2 !important;
         background: var(--color-bg) !important;
-        padding: 40px 0 65px !important;
+        padding: 40px 0 100px !important;
         min-height: auto !important;
         display: flex !important;
         justify-content: center !important;
